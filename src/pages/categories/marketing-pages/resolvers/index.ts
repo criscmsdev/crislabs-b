@@ -1,0 +1,1 @@
+export * from './pages0.resolver'

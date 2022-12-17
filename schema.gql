@@ -1,0 +1,394 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PageData {
+  count: Float!
+  limit: Float!
+  offset: Float!
+}
+
+type Site {
+  _id: ID!
+  dataSite: DataSite!
+  url: String!
+  pages: [Page]
+}
+
+type DataSite {
+  name: String!
+  description: String!
+  type: String!
+  imageSite: ImageSite
+  infoSite: InfoSite!
+  adminSite: [AdminSite!]!
+  dbSite: [DBSite]
+  updateDate: UpdateDate!
+}
+
+type DBSite {
+  uid: String!
+  label: String!
+  slug: String!
+}
+
+type ImageSite {
+  banner: Image
+  logo: Image
+  icon: Image
+}
+
+type Image {
+  uid: String
+  src: String
+  alt: String
+}
+
+type AdminSite {
+  privilege: String!
+  sid: String!
+}
+
+type InfoSite {
+  clientId: String!
+}
+
+type UpdateDate {
+  createdAt: DateTime!
+  lastUpdatedAt: DateTime
+  register: [Register!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Register {
+  uid: String
+  change: String
+  updatedAt: DateTime!
+}
+
+type Seo {
+  title: String!
+  href: String!
+  description: String!
+  image: Image
+}
+
+type ListSite {
+  page: SiteConnection!
+  pageData: PageData
+}
+
+type SiteConnection {
+  edges: [SiteEdge!]
+  pageInfo: SitePageInfo
+}
+
+type SiteEdge {
+  cursor: String
+  node: Site
+}
+
+type SitePageInfo {
+  startCursor: String
+  endCursor: String
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
+type Tags {
+  uid: String!
+  text: String!
+  slug: String!
+}
+
+type Page {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [Page]
+}
+
+type DataPage {
+  type: String!
+  icon: String
+  seoPage: Seo!
+  section: [ComponentPage!]!
+  updateDate: UpdateDate!
+}
+
+type ComponentPage {
+  uid: String!
+  component: String!
+  html: String!
+}
+
+type ListPage {
+  page: PageConnection!
+  pageData: PageData
+}
+
+type PageConnection {
+  edges: [PageEdge!]
+  pageInfo: PagePageInfo
+}
+
+type PageEdge {
+  cursor: String
+  node: Page
+}
+
+type PagePageInfo {
+  startCursor: String
+  endCursor: String
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
+type Article {
+  _id: ID!
+  dataArticle: DataArticle!
+  siteId: String!
+  parentId: String!
+  slug: String!
+}
+
+type DataArticle {
+  title: String!
+  content: String
+  category: String!
+  description: String!
+  meta: String
+  tags: [Tags!]
+  author: String!
+  thumbnail: Image
+  seoArticle: Seo!
+  updateDate: UpdateDate!
+}
+
+type ListArticle {
+  page: ArticleConnection!
+  pageData: PageData
+}
+
+type ArticleConnection {
+  edges: [ArticleEdge!]
+  pageInfo: ArticlePageInfo
+}
+
+type ArticleEdge {
+  cursor: String
+  node: Article
+}
+
+type ArticlePageInfo {
+  startCursor: String
+  endCursor: String
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
+type Query {
+  marketingGetSite(id: String!): Site!
+  marketingGetSites: [Site!]!
+  marketingGetSitesWithCursor(args: ConnectionArgs!): ListSite!
+  marketingGetPage0(id: String!): Page!
+  marketingGetPages0: [Page!]!
+  marketingGetPages0ByParentId(parentId: String!): [Page!]!
+  marketingGetPages0WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  marketingGetPage1(id: String!): Page!
+  marketingGetPages1: [Page!]!
+  marketingGetPages1ByParentId(parentId: String!): [Page!]!
+  marketingGetPages1WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  foodGetSite(id: String!): Site!
+  foodGetSites: [Site!]!
+  foodGetSitesWithCursor(args: ConnectionArgs!): ListSite!
+  wearGetSite(id: String!): Site!
+  wearGetSites: [Site!]!
+  wearGetSitesWithCursor(args: ConnectionArgs!): ListSite!
+  wearGetPage0(id: String!): Page!
+  wearGetPages0: [Page!]!
+  wearGetPages0ByParentId(parentId: String!): [Page!]!
+  wearGetPages0WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  wearGetPage1(id: String!): Page!
+  wearGetPages1: [Page!]!
+  wearGetPages1ByParentId(parentId: String!): [Page!]!
+  wearGetPages1WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  wearGetPage2(id: String!): Page!
+  wearGetPages2: [Page!]!
+  wearGetPages2ByParentId(parentId: String!): [Page!]!
+  wearGetPages2WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  wearGetPage3(id: String!): Page!
+  wearGetPages3: [Page!]!
+  wearGetPages3ByParentId(parentId: String!): [Page!]!
+  wearGetPages3WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  marketingGetArticle(id: String!): Article!
+  marketingGetArticleBySlug(siteId: String!, slug: String!): Article!
+  marketingGetArticles: [Article!]!
+  marketingGetArticlesByParentId(parentId: String!): [Article!]!
+  marketingGetArticlesBySiteId(siteId: String!): [Article!]!
+  marketingGetArticlesWithCursor(args: ConnectionArgs!, parentId: String!): ListArticle!
+}
+
+input ConnectionArgs {
+  """Paginate before opaque cursor"""
+  before: String
+
+  """Paginate after opaque cursor"""
+  after: String
+
+  """Paginate first"""
+  first: Float
+
+  """Paginate last"""
+  last: Float
+}
+
+type Mutation {
+  marketingCreateSite(inputCreate: CreateSite!): Site!
+  marketingUpdateSite(inputUpdate: UpdateSite!): Site!
+  marketingUpdateDbSite(inputDB: UpdateDB!): Site!
+  marketingUpdateImageSite(inputImage: UpdateImage!): Site!
+  marketingDeleteSite(id: String!): String!
+  marketingDeleteSites(ids: [String!]!): [String!]!
+  marketingDeleteAllSites: String!
+  marketingCreatePage0(inputCreate: CreatePage!): Page!
+  marketingUpdatePage0(inputUpdate: UpdatePage!): Page!
+  marketingUpdateImagePage0(inputImage: UpdateImage!): Page!
+  marketingDeletePage0(id: String!): String!
+  marketingDeletePages0(ids: [String!]!): [String!]!
+  marketingDeleteAllPages0: String!
+  marketingCreatePage1(inputCreate: CreatePage!): Page!
+  marketingUpdatePage1(inputUpdate: UpdatePage!): Page!
+  marketingUpdateImagePage1(inputImage: UpdateImage!): Page!
+  marketingDeletePage1(id: String!): String!
+  marketingDeletePages1(ids: [String!]!): [String!]!
+  marketingDeleteAllPages1: String!
+  foodCreateSite(inputCreate: CreateSite!): Site!
+  foodUpdateSite(inputUpdate: UpdateSite!): Site!
+  foodUpdateDbSite(inputDB: UpdateDB!): Site!
+  foodUpdateImageSite(inputImage: UpdateImage!): Site!
+  foodDeleteSite(id: String!): String!
+  foodDeleteSites(ids: [String!]!): [String!]!
+  foodDeleteAllSites: String!
+  wearCreateSite(inputCreate: CreateSite!): Site!
+  wearUpdateSite(inputUpdate: UpdateSite!): Site!
+  wearUpdateDbSite(inputDB: UpdateDB!): Site!
+  wearUpdateImageSite(inputImage: UpdateImage!): Site!
+  wearDeleteSite(id: String!): String!
+  wearDeleteSites(ids: [String!]!): [String!]!
+  wearDeleteAllSites: String!
+  wearCreatePage0(inputCreate: CreatePage!): Page!
+  wearUpdatePage0(inputUpdate: UpdatePage!): Page!
+  wearUpdateImagePage0(inputImage: UpdateImage!): Page!
+  wearDeletePage0(id: String!): String!
+  wearDeletePages0(ids: [String!]!): [String!]!
+  wearDeleteAllPages0: String!
+  wearCreatePage1(inputCreate: CreatePage!): Page!
+  wearUpdatePage1(inputUpdate: UpdatePage!): Page!
+  wearUpdateImagePage1(inputImage: UpdateImage!): Page!
+  wearDeletePage1(id: String!): String!
+  wearDeletePages1(ids: [String!]!): [String!]!
+  wearDeleteAllPages1: String!
+  wearCreatePage2(inputCreate: CreatePage!): Page!
+  wearUpdatePage2(inputUpdate: UpdatePage!): Page!
+  wearUpdateImagePage2(inputImage: UpdateImage!): Page!
+  wearDeletePage2(id: String!): String!
+  wearDeletePages2(ids: [String!]!): [String!]!
+  wearDeleteAllPages2: String!
+  wearCreatePage3(inputCreate: CreatePage!): Page!
+  wearUpdatePage3(inputUpdate: UpdatePage!): Page!
+  wearUpdateImagePage3(inputImage: UpdateImage!): Page!
+  wearDeletePage3(id: String!): String!
+  wearDeletePages3(ids: [String!]!): [String!]!
+  wearDeleteAllPages3: String!
+  marketingCreateArticle(inputCreate: CreateArticle!): Article!
+  marketingUpdateArticle(inputUpdate: UpdateArticle!): Article!
+  marketingUpdateImageArticle(inputImage: UpdateImage!): Article!
+  marketingDeleteArticle(id: String!): String!
+  marketingDeleteArticles(ids: [String!]!): [String!]!
+  marketingDeleteAllArticles: String!
+}
+
+input CreateSite {
+  name: String!
+  domain: String!
+  description: String!
+  type: String!
+  clientId: String
+  uid: String!
+}
+
+input UpdateSite {
+  name: String!
+  domain: String!
+  description: String!
+  type: String!
+  clientId: String
+  uid: String!
+  id: String!
+}
+
+input UpdateDB {
+  id: String!
+  type: [String!]!
+}
+
+input UpdateImage {
+  id: String!
+  type: String
+  uid: String!
+  images: InputImage!
+}
+
+input InputImage {
+  uid: String
+  src: String!
+  alt: String!
+}
+
+input CreatePage {
+  title: String!
+  description: String!
+  type: String!
+  parentId: String!
+  siteId: String!
+  uid: String!
+}
+
+input UpdatePage {
+  title: String!
+  description: String!
+  type: String!
+  parentId: String!
+  siteId: String!
+  uid: String!
+  id: String!
+}
+
+input CreateArticle {
+  title: String!
+  description: String!
+  siteId: String!
+  parentId: String!
+  category: String!
+  uid: String!
+}
+
+input UpdateArticle {
+  title: String
+  description: String
+  siteId: String
+  parentId: String
+  category: String
+  uid: String
+  id: String!
+  content: String!
+  meta: String!
+  tags: [String!]!
+}
