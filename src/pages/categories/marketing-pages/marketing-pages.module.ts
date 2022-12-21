@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MarketingPage0, MarketingPage1 } from 'src/common/entities/page.model';
-import { MarketingPage0Schema, MarketingPage1Schema } from 'src/common/entities/page.schema';
+import {
+  MarketingPage0Schema,
+  MarketingPage1Schema,
+} from 'src/common/entities/page.schema';
 import {
   MarketingPages0Repository,
   MarketingPages1Repository,

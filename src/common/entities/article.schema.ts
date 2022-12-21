@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AbstractDocument } from '../abstract/abstract.schema';
 import { DataArticle } from './article.model';
-
 @Schema({ versionKey: false })
 export class ArticleDocument extends AbstractDocument {
   @Prop({ type: DataArticle })
@@ -13,6 +12,5 @@ export class ArticleDocument extends AbstractDocument {
   @Prop({ trim: true })
   siteId: string;
 }
-
 export const MarketingArticleSchema =
   SchemaFactory.createForClass(ArticleDocument);

@@ -16,3 +16,5 @@ export const SiteSchema = SchemaFactory.createForClass(SiteDocument);
 export const FoodSiteSchema = SchemaFactory.createForClass(SiteDocument);
 export const WearSiteSchema = SchemaFactory.createForClass(SiteDocument);
 export const MarketingSiteSchema = SchemaFactory.createForClass(SiteDocument);
+export const HardwareStoreSiteSchema =
+  SchemaFactory.createForClass(SiteDocument);

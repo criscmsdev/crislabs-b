@@ -12,7 +12,7 @@ import {
   UpdateImage,
   UpdateSite,
 } from 'src/common/dto/site.input';
-import { ListSite, Site } from 'src/common/entities/site.model';
+import { ListSite, MarketingSite, Site } from 'src/common/entities/site.model';
 import ConnectionArgs, {
   getPagingParameters,
 } from 'src/common/pagination/relay/connection.args';
@@ -20,32 +20,32 @@ import { connectionFromArraySlice } from 'graphql-relay';
 
 import { MarketingSitesService } from './marketing-sites.service';
 import { MarketingPages0Service } from 'src/pages/categories/marketing-pages/services';
-import { Page } from 'src/common/entities/page.model';
+import { MarketingPage0, Page } from 'src/common/entities/page.model';
 
-@Resolver(() => Site)
+@Resolver(() => MarketingSite)
 export class MarketingSiteResolver {
   constructor(
     private readonly siteService: MarketingSitesService,
     private readonly pageService: MarketingPages0Service,
   ) {}
 
-  @Mutation(() => Site, { name: 'marketingCreateSite' })
+  @Mutation(() => MarketingSite, { name: 'marketingCreateSite' })
   async create(@Args('inputCreate') inputCreate: CreateSite) {
     const document = await this.siteService.create(inputCreate);
     this.pageService.create(this.page0(document._id, inputCreate.uid));
     return document;
   }
 
-  @Mutation(() => Site, { name: 'marketingUpdateSite' })
+  @Mutation(() => MarketingSite, { name: 'marketingUpdateSite' })
   update(@Args('inputUpdate') inputUpdate: UpdateSite) {
     return this.siteService.update(inputUpdate);
   }
 
-  @Mutation(() => Site, { name: 'marketingUpdateDbSite' })
+  @Mutation(() => MarketingSite, { name: 'marketingUpdateDbSite' })
   updateDB(@Args('inputDB') inputDB: UpdateDB) {
     return this.siteService.updateDB(inputDB);
   }
-  @Mutation(() => Site, { name: 'marketingUpdateImageSite' })
+  @Mutation(() => MarketingSite, { name: 'marketingUpdateImageSite' })
   updateImage(@Args('inputImage') inputImage: UpdateImage) {
     return this.siteService.updateImage(inputImage);
   }
@@ -64,11 +64,11 @@ export class MarketingSiteResolver {
     return this.siteService.deleteAllSites();
   }
 
-  @Query(() => Site, { name: 'marketingGetSite' })
+  @Query(() => MarketingSite, { name: 'marketingGetSite' })
   getSite(@Args('id') id: string) {
     return this.siteService.getSite(id);
   }
-  @Query(() => [Site], { name: 'marketingGetSites' })
+  @Query(() => [MarketingSite], { name: 'marketingGetSites' })
   getSites() {
     return this.siteService.getSites();
   }
@@ -88,8 +88,8 @@ export class MarketingSiteResolver {
     return { page, pageData: { count, limit, offset } };
   }
 
-  @ResolveField('pages', () => [Page], { nullable: 'itemsAndList' })
-  getPage0(@Parent() { _id }: Site) {
+  @ResolveField('pages', () => [MarketingPage0], { nullable: 'itemsAndList' })
+  getPage0(@Parent() { _id }: MarketingSite) {
     _id.toString();
     return this.pageService.findPagesByParentId(_id.toString());
   }

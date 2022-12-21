@@ -18,9 +18,9 @@ export class FoodSitesService {
   ) {}
   async create(input: CreateSite) {
     const data = await this.siteRepository.add(input);
-
     return this.toModel(data);
   }
+  
   async update(input: UpdateSite) {
     const data = await this.siteRepository.update(input);
     return this.toModel(data);

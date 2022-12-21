@@ -26,9 +26,11 @@ import { WearPages2Service } from './services/pages2.service';
 import { WearPages2Resolver } from './resolvers/pages2.resolver';
 import { WearPages3Service } from './services/pages3.service';
 import { WearPages3Resolver } from './resolvers/pages3.resolver';
+// import { WearProductsModule } from 'src/products/categories/wear-products/wear-products.module';
 
 @Module({
   imports: [
+    // WearProductsModule,
     MongooseModule.forFeature(
       [
         { name: WearPage0.name, schema: WearPage0Schema },

@@ -161,13 +161,11 @@ export abstract class AbstractRepositoryArticle<
       parentId: parentId,
       slug: slug(title),
       dataArticle: {
-        title: title,
-        description: description,
         category: category,
         author: uid,
         seoArticle: {
           title: capitalizar(title),
-          href: slug(title) === 'home' ? '' : slug(title),
+          href: slug(title),
           description: description,
         },
         updateDate: {
@@ -195,10 +193,8 @@ export abstract class AbstractRepositoryArticle<
   }: UpdateArticle) {
     return {
       $set: {
-        'dataArticle.title': title,
         'dataArticle.content': content,
         'dataArticle.category': category,
-        'dataArticle.description': description,
         'dataArticle.meta': meta,
         'dataArticle.tags': tags.map((data) => ({
           uid: uuidv3(),

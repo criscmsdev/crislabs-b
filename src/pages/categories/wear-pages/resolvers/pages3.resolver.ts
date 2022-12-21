@@ -4,20 +4,20 @@ import ConnectionArgs, {
   getPagingParameters,
 } from 'src/common/pagination/relay/connection.args';
 import { connectionFromArraySlice } from 'graphql-relay';
-import { ListPage, Page } from 'src/common/entities/page.model';
+import { ListPage, Page, WearPage3 } from 'src/common/entities/page.model';
 import { WearPages3Service } from '../services/pages3.service';
 import { CreatePage, UpdatePage } from 'src/common/dto/page.input';
 import { UpdateImage } from 'src/common/dto/site.input';
 
-@Resolver(() => Page)
+@Resolver(() => WearPage3)
 export class WearPages3Resolver {
   constructor(private readonly pages3Service: WearPages3Service) {}
 
-  @Mutation(() => Page, { name: 'wearCreatePage3' })
+  @Mutation(() => WearPage3, { name: 'wearCreatePage3' })
   createPage(@Args('inputCreate') inputCreate: CreatePage) {
     return this.pages3Service.create(inputCreate);
   }
-  @Mutation(() => Page, { name: 'wearUpdatePage3' })
+  @Mutation(() => WearPage3, { name: 'wearUpdatePage3' })
   updatePage(
     @Args('inputUpdate') inputUpdate: UpdatePage,
     // @Args('type') type: string,
@@ -25,7 +25,7 @@ export class WearPages3Resolver {
     return this.pages3Service.update(inputUpdate);
   }
 
-  @Mutation(() => Page, { name: 'wearUpdateImagePage3' })
+  @Mutation(() => WearPage3, { name: 'wearUpdateImagePage3' })
   updateImage(@Args('inputImage') inputImage: UpdateImage) {
     return this.pages3Service.updateImage(inputImage);
   }
@@ -48,17 +48,17 @@ export class WearPages3Resolver {
     return this.pages3Service.deleteAllPages();
   }
 
-  @Query(() => Page, { name: 'wearGetPage3' })
+  @Query(() => WearPage3, { name: 'wearGetPage3' })
   findPage(@Args('id') id: string) {
     return this.pages3Service.findPage(id);
   }
 
-  @Query(() => [Page], { name: 'wearGetPages3' })
+  @Query(() => [WearPage3], { name: 'wearGetPages3' })
   findPages() {
     return this.pages3Service.findPages();
   }
 
-  @Query(() => [Page], { name: 'wearGetPages3ByParentId' })
+  @Query(() => [WearPage3], { name: 'wearGetPages3ByParentId' })
   findPagesByParentId(
     @Args('parentId') parentId: string,
     // @Args('type') type: string,

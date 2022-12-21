@@ -11,24 +11,29 @@ import ConnectionArgs, {
   getPagingParameters,
 } from 'src/common/pagination/relay/connection.args';
 import { connectionFromArraySlice } from 'graphql-relay';
-import { ListPage, Page } from 'src/common/entities/page.model';
+import {
+  ListPage,
+  Page,
+  WearPage1,
+  WearPage2,
+} from 'src/common/entities/page.model';
 import { WearPages1Service } from '../services/pages1.service';
 import { CreatePage, UpdatePage } from 'src/common/dto/page.input';
 import { UpdateImage } from 'src/common/dto/site.input';
 import { WearPages2Service } from '../services/pages2.service';
 
-@Resolver(() => Page)
+@Resolver(() => WearPage1)
 export class WearPages1Resolver {
   constructor(
     private readonly pages1Service: WearPages1Service,
     private readonly pages2Service: WearPages2Service,
   ) {}
 
-  @Mutation(() => Page, { name: 'wearCreatePage1' })
+  @Mutation(() => WearPage1, { name: 'wearCreatePage1' })
   createPage(@Args('inputCreate') inputCreate: CreatePage) {
     return this.pages1Service.create(inputCreate);
   }
-  @Mutation(() => Page, { name: 'wearUpdatePage1' })
+  @Mutation(() => WearPage1, { name: 'wearUpdatePage1' })
   updatePage(
     @Args('inputUpdate') inputUpdate: UpdatePage,
     // @Args('type') type: string,
@@ -36,7 +41,7 @@ export class WearPages1Resolver {
     return this.pages1Service.update(inputUpdate);
   }
 
-  @Mutation(() => Page, { name: 'wearUpdateImagePage1' })
+  @Mutation(() => WearPage1, { name: 'wearUpdateImagePage1' })
   updateImage(@Args('inputImage') inputImage: UpdateImage) {
     return this.pages1Service.updateImage(inputImage);
   }
@@ -59,17 +64,17 @@ export class WearPages1Resolver {
     return this.pages1Service.deleteAllPages();
   }
 
-  @Query(() => Page, { name: 'wearGetPage1' })
+  @Query(() => WearPage1, { name: 'wearGetPage1' })
   findPage(@Args('id') id: string) {
     return this.pages1Service.findPage(id);
   }
 
-  @Query(() => [Page], { name: 'wearGetPages1' })
+  @Query(() => [WearPage1], { name: 'wearGetPages1' })
   findPages() {
     return this.pages1Service.findPages();
   }
 
-  @Query(() => [Page], { name: 'wearGetPages1ByParentId' })
+  @Query(() => [WearPage1], { name: 'wearGetPages1ByParentId' })
   findPagesByParentId(
     @Args('parentId') parentId: string,
     // @Args('type') type: string,
@@ -99,8 +104,8 @@ export class WearPages1Resolver {
     return { page, pageData: { count, limit, offset } };
   }
 
-  @ResolveField('pages', () => [Page], { nullable: 'itemsAndList' })
-  getPage(@Parent() { _id }: Page) {
+  @ResolveField('pages', () => [WearPage2], { nullable: 'itemsAndList' })
+  getPage(@Parent() { _id }: WearPage1) {
     return this.pages2Service.findPagesByParentId(_id.toString());
   }
 }

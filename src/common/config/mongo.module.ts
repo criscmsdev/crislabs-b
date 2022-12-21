@@ -34,6 +34,16 @@ import { MongooseModule } from '@nestjs/mongoose';
       }),
       inject: [ConfigService],
     }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      connectionName: 'hardwareStoreDB',
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('DATABASE_URL_HARDWARE_STORE'),
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }),
+      inject: [ConfigService],
+    }),
     // MongooseModule.forRootAsync({
     //   imports: [ConfigModule],
     //   connectionName: 'sitesWearDB',

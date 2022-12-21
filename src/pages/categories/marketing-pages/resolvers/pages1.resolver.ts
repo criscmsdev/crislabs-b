@@ -4,20 +4,20 @@ import ConnectionArgs, {
   getPagingParameters,
 } from 'src/common/pagination/relay/connection.args';
 import { connectionFromArraySlice } from 'graphql-relay';
-import { ListPage, Page } from 'src/common/entities/page.model';
+import { ListPage, MarketingPage1 } from 'src/common/entities/page.model';
 import { MarketingPages1Service } from '../services/pages1.service';
 import { CreatePage, UpdatePage } from 'src/common/dto/page.input';
 import { UpdateImage } from 'src/common/dto/site.input';
 
-@Resolver(() => Page)
+@Resolver(() => MarketingPage1)
 export class MarketingPages1Resolver {
   constructor(private readonly pages1Service: MarketingPages1Service) {}
 
-  @Mutation(() => Page, { name: 'marketingCreatePage1' })
+  @Mutation(() => MarketingPage1, { name: 'marketingCreatePage1' })
   createPage(@Args('inputCreate') inputCreate: CreatePage) {
     return this.pages1Service.create(inputCreate);
   }
-  @Mutation(() => Page, { name: 'marketingUpdatePage1' })
+  @Mutation(() => MarketingPage1, { name: 'marketingUpdatePage1' })
   updatePage(
     @Args('inputUpdate') inputUpdate: UpdatePage,
     // @Args('type') type: string,
@@ -25,7 +25,7 @@ export class MarketingPages1Resolver {
     return this.pages1Service.update(inputUpdate);
   }
 
-  @Mutation(() => Page, { name: 'marketingUpdateImagePage1' })
+  @Mutation(() => MarketingPage1, { name: 'marketingUpdateImagePage1' })
   updateImage(@Args('inputImage') inputImage: UpdateImage) {
     return this.pages1Service.updateImage(inputImage);
   }
@@ -48,17 +48,17 @@ export class MarketingPages1Resolver {
     return this.pages1Service.deleteAllPages();
   }
 
-  @Query(() => Page, { name: 'marketingGetPage1' })
+  @Query(() => MarketingPage1, { name: 'marketingGetPage1' })
   findPage(@Args('id') id: string) {
     return this.pages1Service.findPage(id);
   }
 
-  @Query(() => [Page], { name: 'marketingGetPages1' })
+  @Query(() => [MarketingPage1], { name: 'marketingGetPages1' })
   findPages() {
     return this.pages1Service.findPages();
   }
 
-  @Query(() => [Page], { name: 'marketingGetPages1ByParentId' })
+  @Query(() => [MarketingPage1], { name: 'marketingGetPages1ByParentId' })
   findPagesByParentId(
     @Args('parentId') parentId: string,
     // @Args('type') type: string,

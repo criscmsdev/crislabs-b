@@ -42,6 +42,18 @@ export class UpdateImage {
 }
 
 @InputType()
+export class UpdateImageProduct {
+  @Field()
+  readonly id: string;
+  @Field({ nullable: true })
+  readonly type?: string;
+  @Field()
+  readonly uid: string;
+  @Field(() => [InputImage])
+  readonly images?: InputImage[];
+}
+
+@InputType()
 export class InputImage {
   @Field({ nullable: true })
   readonly uid?: string;

@@ -5,7 +5,7 @@ import { CommonModule } from './common/config/common.module';
 import { SitesModule } from './sites/sites.module';
 import { PagesModule } from './pages/pages.module';
 import { ArticlesModule } from './articles/articles.module';
-import { ScheduleModule } from '@nestjs/schedule';
+import { ProductsModule } from './products/products.module';
 @Module({
   imports: [
     // ScheduleModule.forRoot(),
@@ -13,6 +13,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     SitesModule,
     PagesModule,
     ArticlesModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

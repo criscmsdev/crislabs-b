@@ -16,14 +16,10 @@ export class Article extends AbstractModel {
 }
 @ObjectType()
 export class DataArticle {
-  @Field()
-  readonly title: string;
   @Field({ nullable: true })
   readonly content?: string;
   @Field()
   readonly category: string;
-  @Field()
-  readonly description: string;
   @Field({ nullable: true })
   readonly meta?: string;
   @Field(() => [Tags], { nullable: true })

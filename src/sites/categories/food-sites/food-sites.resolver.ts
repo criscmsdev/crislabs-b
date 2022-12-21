@@ -1,6 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreateSite, UpdateDB, UpdateImage, UpdateSite } from 'src/common/dto/site.input';
-import { ListSite, Site } from 'src/common/entities/site.model';
+import {
+  CreateSite,
+  UpdateDB,
+  UpdateImage,
+  UpdateSite,
+} from 'src/common/dto/site.input';
+import { FoodSite, ListSite, Site } from 'src/common/entities/site.model';
 import ConnectionArgs, {
   getPagingParameters,
 } from 'src/common/pagination/relay/connection.args';
@@ -8,25 +13,25 @@ import { connectionFromArraySlice } from 'graphql-relay';
 
 import { FoodSitesService } from './food-sites.service';
 
-@Resolver(() => Site)
+@Resolver(() => FoodSite)
 export class FoodSiteResolver {
   constructor(private readonly siteService: FoodSitesService) {}
 
-  @Mutation(() => Site, { name: 'foodCreateSite' })
+  @Mutation(() => FoodSite, { name: 'foodCreateSite' })
   create(@Args('inputCreate') inputCreate: CreateSite) {
     return this.siteService.create(inputCreate);
   }
 
-  @Mutation(() => Site, { name: 'foodUpdateSite' })
+  @Mutation(() => FoodSite, { name: 'foodUpdateSite' })
   update(@Args('inputUpdate') inputUpdate: UpdateSite) {
     return this.siteService.update(inputUpdate);
   }
 
-  @Mutation(() => Site, { name: 'foodUpdateDbSite' })
+  @Mutation(() => FoodSite, { name: 'foodUpdateDbSite' })
   updateDB(@Args('inputDB') inputDB: UpdateDB) {
     return this.siteService.updateDB(inputDB);
   }
-  @Mutation(() => Site, { name: 'foodUpdateImageSite' })
+  @Mutation(() => FoodSite, { name: 'foodUpdateImageSite' })
   updateImage(@Args('inputImage') inputImage: UpdateImage) {
     return this.siteService.updateImage(inputImage);
   }
@@ -45,11 +50,11 @@ export class FoodSiteResolver {
     return this.siteService.deleteAllSites();
   }
 
-  @Query(() => Site, { name: 'foodGetSite' })
+  @Query(() => FoodSite, { name: 'foodGetSite' })
   getSite(@Args('id') id: string) {
     return this.siteService.getSite(id);
   }
-  @Query(() => [Site], { name: 'foodGetSites' })
+  @Query(() => [FoodSite], { name: 'foodGetSites' })
   getSites() {
     return this.siteService.getSites();
   }

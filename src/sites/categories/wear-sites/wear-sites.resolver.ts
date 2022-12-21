@@ -12,7 +12,7 @@ import {
   UpdateImage,
   UpdateSite,
 } from 'src/common/dto/site.input';
-import { ListSite, Site } from 'src/common/entities/site.model';
+import { ListSite, Site, WearSite } from 'src/common/entities/site.model';
 import ConnectionArgs, {
   getPagingParameters,
 } from 'src/common/pagination/relay/connection.args';
@@ -20,33 +20,33 @@ import { connectionFromArraySlice } from 'graphql-relay';
 
 import { WearSitesService } from './wear-sites.service';
 import { WearPages0Service } from 'src/pages/categories/wear-pages/services';
-import { Page } from 'src/common/entities/page.model';
+import { Page, WearPage0 } from 'src/common/entities/page.model';
 
-@Resolver(() => Site)
+@Resolver(() => WearSite)
 export class WearSiteResolver {
   constructor(
     private readonly siteService: WearSitesService, 
     private readonly pageService: WearPages0Service,
   ) {}
 
-  @Mutation(() => Site, { name: 'wearCreateSite' })
+  @Mutation(() => WearSite, { name: 'wearCreateSite' })
   async create(@Args('inputCreate') inputCreate: CreateSite) {
     const document = await this.siteService.create(inputCreate);
     this.pageService.create(this.page0(document._id, inputCreate.uid));
     return document;
   }
 
-  @Mutation(() => Site, { name: 'wearUpdateSite' })
+  @Mutation(() => WearSite, { name: 'wearUpdateSite' })
   update(@Args('inputUpdate') inputUpdate: UpdateSite) {
     return this.siteService.update(inputUpdate);
   }
 
-  @Mutation(() => Site, { name: 'wearUpdateDbSite' })
+  @Mutation(() => WearSite, { name: 'wearUpdateDbSite' })
   updateDB(@Args('inputDB') inputDB: UpdateDB) {
     return this.siteService.updateDB(inputDB);
   }
 
-  @Mutation(() => Site, { name: 'wearUpdateImageSite' })
+  @Mutation(() => WearSite, { name: 'wearUpdateImageSite' })
   updateImage(@Args('inputImage') inputImage: UpdateImage) {
     return this.siteService.updateImage(inputImage);
   }
@@ -68,12 +68,12 @@ export class WearSiteResolver {
     return this.siteService.deleteAllSites();
   }
 
-  @Query(() => Site, { name: 'wearGetSite' })
+  @Query(() => WearSite, { name: 'wearGetSite' })
   getSite(@Args('id') id: string) {
     return this.siteService.getSite(id);
   }
 
-  @Query(() => [Site], { name: 'wearGetSites' })
+  @Query(() => [WearSite], { name: 'wearGetSites' })
   getSites() {
     return this.siteService.getSites();
   }
@@ -94,8 +94,8 @@ export class WearSiteResolver {
     return { page, pageData: { count, limit, offset } };
   }
 
-  @ResolveField('pages', () => [Page], { nullable: 'itemsAndList' })
-  getPage0(@Parent() { _id }: Site) {
+  @ResolveField('pages', () => [WearPage0], { nullable: 'itemsAndList' })
+  getPage0(@Parent() { _id }: WearSite) {
     _id.toString();
     return this.pageService.findPagesByParentId(_id.toString());
   }

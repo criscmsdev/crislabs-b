@@ -2,7 +2,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AbstractDocument } from '../abstract/abstract.schema';
 import { DataPage } from './page.model';
 
-
 @Schema({ versionKey: false })
 export class PageDocument extends AbstractDocument {
   @Prop({ type: DataPage })
@@ -48,3 +47,25 @@ export const MarketingPage7Schema = SchemaFactory.createForClass(PageDocument);
 export const MarketingPage8Schema = SchemaFactory.createForClass(PageDocument);
 export const MarketingPage9Schema = SchemaFactory.createForClass(PageDocument);
 export const MarketingPage10Schema = SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage0Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage1Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage2Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage3Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage4Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage5Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage6Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage7Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage8Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage9Schema =
+  SchemaFactory.createForClass(PageDocument);
+export const HardwareStorePage10Schema =
+  SchemaFactory.createForClass(PageDocument);

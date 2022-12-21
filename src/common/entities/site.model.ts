@@ -113,6 +113,8 @@ export class MarketingSite extends Site {}
 export class FoodSite extends Site {}
 @ObjectType()
 export class WearSite extends Site {}
+@ObjectType()
+export class HardwareStoreSite extends Site {}
 
 @ObjectType()
 export class ListSite extends RelayTypes<Site>(Site) {}

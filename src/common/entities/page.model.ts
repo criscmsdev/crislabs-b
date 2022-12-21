@@ -121,31 +121,31 @@ export class MarketingPage11 extends Page {}
 export class MarketingPage12 extends Page {}
 
 @ObjectType()
-export class HardwarePage0 extends Page {}
+export class HardwareStorePage0 extends Page {}
 @ObjectType()
-export class HardwarePage1 extends Page {}
+export class HardwareStorePage1 extends Page {}
 @ObjectType()
-export class HardwarePage2 extends Page {}
+export class HardwareStorePage2 extends Page {}
 @ObjectType()
-export class HardwarePage3 extends Page {}
+export class HardwareStorePage3 extends Page {}
 @ObjectType()
-export class HardwarePage4 extends Page {}
+export class HardwareStorePage4 extends Page {}
 @ObjectType()
-export class HardwarePage5 extends Page {}
+export class HardwareStorePage5 extends Page {}
 @ObjectType()
-export class HardwarePage6 extends Page {}
+export class HardwareStorePage6 extends Page {}
 @ObjectType()
-export class HardwarePage7 extends Page {}
+export class HardwareStorePage7 extends Page {}
 @ObjectType()
-export class HardwarePage8 extends Page {}
+export class HardwareStorePage8 extends Page {}
 @ObjectType()
-export class HardwarePage9 extends Page {}
+export class HardwareStorePage9 extends Page {}
 @ObjectType()
-export class HardwarePage10 extends Page {}
+export class HardwareStorePage10 extends Page {}
 @ObjectType()
-export class HardwarePage11 extends Page {}
+export class HardwareStorePage11 extends Page {}
 @ObjectType()
-export class HardwarePage12 extends Page {}
+export class HardwareStorePage12 extends Page {}
 
 @ObjectType()
 export class GlassesPage0 extends Page {}

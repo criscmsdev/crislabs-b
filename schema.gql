@@ -12,7 +12,6 @@ type Site {
   _id: ID!
   dataSite: DataSite!
   url: String!
-  pages: [Page]
 }
 
 type DataSite {
@@ -77,6 +76,33 @@ type Seo {
   image: Image
 }
 
+type MarketingSite {
+  _id: ID!
+  dataSite: DataSite!
+  url: String!
+  pages: [MarketingPage0]
+}
+
+type FoodSite {
+  _id: ID!
+  dataSite: DataSite!
+  url: String!
+}
+
+type WearSite {
+  _id: ID!
+  dataSite: DataSite!
+  url: String!
+  pages: [WearPage0]
+}
+
+type HardwareStoreSite {
+  _id: ID!
+  dataSite: DataSite!
+  url: String!
+  pages: [HardwareStorePage0]
+}
+
 type ListSite {
   page: SiteConnection!
   pageData: PageData
@@ -111,7 +137,6 @@ type Page {
   slug: String!
   siteId: String!
   parentId: String!
-  pages: [Page]
 }
 
 type DataPage {
@@ -126,6 +151,94 @@ type ComponentPage {
   uid: String!
   component: String!
   html: String!
+}
+
+type WearPage0 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [WearPage1]
+}
+
+type WearPage1 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [WearPage2]
+}
+
+type WearPage2 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [WearPage3]
+}
+
+type WearPage3 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+}
+
+type MarketingPage0 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [MarketingPage1]
+}
+
+type MarketingPage1 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+}
+
+type HardwareStorePage0 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [HardwareStorePage1]
+}
+
+type HardwareStorePage1 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [HardwareStorePage2]
+}
+
+type HardwareStorePage2 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
+  pages: [HardwareStorePage3]
+  products: [Product]
+}
+
+type HardwareStorePage3 {
+  _id: ID!
+  dataPage: DataPage!
+  slug: String!
+  siteId: String!
+  parentId: String!
 }
 
 type ListPage {
@@ -150,6 +263,67 @@ type PagePageInfo {
   hasNextPage: Boolean!
 }
 
+type Product {
+  _id: ID!
+  dataProduct: DataProduct!
+  slug: String!
+  siteId: String!
+  parentId: String!
+}
+
+type DataProduct {
+  type: Type!
+  mark: Mark!
+  inStock: Float!
+  price: Float!
+  discountPrice: Float!
+  promotion: Promotion!
+  details: String
+  featured: String
+  specs: String
+  tags: [Tags!]!
+  imageProduct: [Image!]!
+  seoProduct: Seo!
+  updateDate: UpdateDate!
+}
+
+type Type {
+  label: String!
+  slug: String!
+}
+
+type Mark {
+  label: String!
+  slug: String!
+}
+
+type Promotion {
+  label: String!
+  slug: String!
+}
+
+type ListHardwareStoreProduct {
+  page: ProductConnection!
+  pageData: PageData
+}
+
+type ProductConnection {
+  edges: [ProductEdge!]
+  pageInfo: ProductPageInfo
+}
+
+type ProductEdge {
+  cursor: String
+  node: Product
+}
+
+type ProductPageInfo {
+  startCursor: String
+  endCursor: String
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+}
+
 type Article {
   _id: ID!
   dataArticle: DataArticle!
@@ -159,10 +333,8 @@ type Article {
 }
 
 type DataArticle {
-  title: String!
   content: String
   category: String!
-  description: String!
   meta: String
   tags: [Tags!]
   author: String!
@@ -194,39 +366,61 @@ type ArticlePageInfo {
 }
 
 type Query {
-  marketingGetSite(id: String!): Site!
-  marketingGetSites: [Site!]!
+  marketingGetSite(id: String!): MarketingSite!
+  marketingGetSites: [MarketingSite!]!
   marketingGetSitesWithCursor(args: ConnectionArgs!): ListSite!
-  marketingGetPage0(id: String!): Page!
-  marketingGetPages0: [Page!]!
-  marketingGetPages0ByParentId(parentId: String!): [Page!]!
+  marketingGetPage0(id: String!): MarketingPage0!
+  marketingGetPages0: [MarketingPage0!]!
+  marketingGetPages0ByParentId(parentId: String!): [MarketingPage0!]!
   marketingGetPages0WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
-  marketingGetPage1(id: String!): Page!
-  marketingGetPages1: [Page!]!
-  marketingGetPages1ByParentId(parentId: String!): [Page!]!
+  marketingGetPage1(id: String!): MarketingPage1!
+  marketingGetPages1: [MarketingPage1!]!
+  marketingGetPages1ByParentId(parentId: String!): [MarketingPage1!]!
   marketingGetPages1WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
-  foodGetSite(id: String!): Site!
-  foodGetSites: [Site!]!
+  foodGetSite(id: String!): FoodSite!
+  foodGetSites: [FoodSite!]!
   foodGetSitesWithCursor(args: ConnectionArgs!): ListSite!
-  wearGetSite(id: String!): Site!
-  wearGetSites: [Site!]!
+  wearGetSite(id: String!): WearSite!
+  wearGetSites: [WearSite!]!
   wearGetSitesWithCursor(args: ConnectionArgs!): ListSite!
-  wearGetPage0(id: String!): Page!
-  wearGetPages0: [Page!]!
-  wearGetPages0ByParentId(parentId: String!): [Page!]!
+  wearGetPage0(id: String!): WearPage0!
+  wearGetPages0: [WearPage0!]!
+  wearGetPages0ByParentId(parentId: String!): [WearPage0!]!
   wearGetPages0WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
-  wearGetPage1(id: String!): Page!
-  wearGetPages1: [Page!]!
-  wearGetPages1ByParentId(parentId: String!): [Page!]!
+  wearGetPage1(id: String!): WearPage1!
+  wearGetPages1: [WearPage1!]!
+  wearGetPages1ByParentId(parentId: String!): [WearPage1!]!
   wearGetPages1WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
-  wearGetPage2(id: String!): Page!
-  wearGetPages2: [Page!]!
-  wearGetPages2ByParentId(parentId: String!): [Page!]!
+  wearGetPage2(id: String!): WearPage2!
+  wearGetPages2: [WearPage2!]!
+  wearGetPages2ByParentId(parentId: String!): [WearPage2!]!
   wearGetPages2WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
-  wearGetPage3(id: String!): Page!
-  wearGetPages3: [Page!]!
-  wearGetPages3ByParentId(parentId: String!): [Page!]!
+  wearGetPage3(id: String!): WearPage3!
+  wearGetPages3: [WearPage3!]!
+  wearGetPages3ByParentId(parentId: String!): [WearPage3!]!
   wearGetPages3WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  hardwareStoreGetSite(id: String!): HardwareStoreSite!
+  hardwareStoreGetSites: [HardwareStoreSite!]!
+  hardwareStoreGetSitesWithCursor(args: ConnectionArgs!): ListSite!
+  hardwareStoreGetPage0(id: String!): HardwareStorePage0!
+  hardwareStoreGetPages0: [HardwareStorePage0!]!
+  hardwareStoreGetPages0ByParentId(parentId: String!): [HardwareStorePage0!]!
+  hardwareStoreGetPages0WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  hardwareStoreGetPage1(id: String!): HardwareStorePage1!
+  hardwareStoreGetPages1: [HardwareStorePage1!]!
+  hardwareStoreGetPages1ByParentId(parentId: String!): [HardwareStorePage1!]!
+  hardwareStoreGetPages1WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  hardwareStoreGetPage2(id: String!): HardwareStorePage2!
+  hardwareStoreGetPages2: [HardwareStorePage2!]!
+  hardwareStoreGetPages2ByParentId(parentId: String!): [HardwareStorePage2!]!
+  hardwareStoreGetPages2WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  hardwareStoreGetPage3(id: String!): HardwareStorePage3!
+  hardwareStoreGetPages3: [HardwareStorePage3!]!
+  hardwareStoreGetPages3ByParentId(parentId: String!): [HardwareStorePage3!]!
+  hardwareStoreGetPages3WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
+  hardwareStoreGetProduct(id: String!, type: String!): Product!
+  hardwareStoreGetProducts(type: String!): [Product!]!
+  hardwareStoreGetProductsWithCursor(args: ConnectionArgs!, type: String!, parentId: String!): ListHardwareStoreProduct!
   marketingGetArticle(id: String!): Article!
   marketingGetArticleBySlug(siteId: String!, slug: String!): Article!
   marketingGetArticles: [Article!]!
@@ -250,63 +444,101 @@ input ConnectionArgs {
 }
 
 type Mutation {
-  marketingCreateSite(inputCreate: CreateSite!): Site!
-  marketingUpdateSite(inputUpdate: UpdateSite!): Site!
-  marketingUpdateDbSite(inputDB: UpdateDB!): Site!
-  marketingUpdateImageSite(inputImage: UpdateImage!): Site!
+  marketingCreateSite(inputCreate: CreateSite!): MarketingSite!
+  marketingUpdateSite(inputUpdate: UpdateSite!): MarketingSite!
+  marketingUpdateDbSite(inputDB: UpdateDB!): MarketingSite!
+  marketingUpdateImageSite(inputImage: UpdateImage!): MarketingSite!
   marketingDeleteSite(id: String!): String!
   marketingDeleteSites(ids: [String!]!): [String!]!
   marketingDeleteAllSites: String!
-  marketingCreatePage0(inputCreate: CreatePage!): Page!
-  marketingUpdatePage0(inputUpdate: UpdatePage!): Page!
-  marketingUpdateImagePage0(inputImage: UpdateImage!): Page!
+  marketingCreatePage0(inputCreate: CreatePage!): MarketingPage0!
+  marketingUpdatePage0(inputUpdate: UpdatePage!): MarketingPage0!
+  marketingUpdateImagePage0(inputImage: UpdateImage!): MarketingPage0!
   marketingDeletePage0(id: String!): String!
   marketingDeletePages0(ids: [String!]!): [String!]!
   marketingDeleteAllPages0: String!
-  marketingCreatePage1(inputCreate: CreatePage!): Page!
-  marketingUpdatePage1(inputUpdate: UpdatePage!): Page!
-  marketingUpdateImagePage1(inputImage: UpdateImage!): Page!
+  marketingCreatePage1(inputCreate: CreatePage!): MarketingPage1!
+  marketingUpdatePage1(inputUpdate: UpdatePage!): MarketingPage1!
+  marketingUpdateImagePage1(inputImage: UpdateImage!): MarketingPage1!
   marketingDeletePage1(id: String!): String!
   marketingDeletePages1(ids: [String!]!): [String!]!
   marketingDeleteAllPages1: String!
-  foodCreateSite(inputCreate: CreateSite!): Site!
-  foodUpdateSite(inputUpdate: UpdateSite!): Site!
-  foodUpdateDbSite(inputDB: UpdateDB!): Site!
-  foodUpdateImageSite(inputImage: UpdateImage!): Site!
+  foodCreateSite(inputCreate: CreateSite!): FoodSite!
+  foodUpdateSite(inputUpdate: UpdateSite!): FoodSite!
+  foodUpdateDbSite(inputDB: UpdateDB!): FoodSite!
+  foodUpdateImageSite(inputImage: UpdateImage!): FoodSite!
   foodDeleteSite(id: String!): String!
   foodDeleteSites(ids: [String!]!): [String!]!
   foodDeleteAllSites: String!
-  wearCreateSite(inputCreate: CreateSite!): Site!
-  wearUpdateSite(inputUpdate: UpdateSite!): Site!
-  wearUpdateDbSite(inputDB: UpdateDB!): Site!
-  wearUpdateImageSite(inputImage: UpdateImage!): Site!
+  wearCreateSite(inputCreate: CreateSite!): WearSite!
+  wearUpdateSite(inputUpdate: UpdateSite!): WearSite!
+  wearUpdateDbSite(inputDB: UpdateDB!): WearSite!
+  wearUpdateImageSite(inputImage: UpdateImage!): WearSite!
   wearDeleteSite(id: String!): String!
   wearDeleteSites(ids: [String!]!): [String!]!
   wearDeleteAllSites: String!
-  wearCreatePage0(inputCreate: CreatePage!): Page!
-  wearUpdatePage0(inputUpdate: UpdatePage!): Page!
-  wearUpdateImagePage0(inputImage: UpdateImage!): Page!
+  wearCreatePage0(inputCreate: CreatePage!): WearPage0!
+  wearUpdatePage0(inputUpdate: UpdatePage!): WearPage0!
+  wearUpdateImagePage0(inputImage: UpdateImage!): WearPage0!
   wearDeletePage0(id: String!): String!
   wearDeletePages0(ids: [String!]!): [String!]!
   wearDeleteAllPages0: String!
-  wearCreatePage1(inputCreate: CreatePage!): Page!
-  wearUpdatePage1(inputUpdate: UpdatePage!): Page!
-  wearUpdateImagePage1(inputImage: UpdateImage!): Page!
+  wearCreatePage1(inputCreate: CreatePage!): WearPage1!
+  wearUpdatePage1(inputUpdate: UpdatePage!): WearPage1!
+  wearUpdateImagePage1(inputImage: UpdateImage!): WearPage1!
   wearDeletePage1(id: String!): String!
   wearDeletePages1(ids: [String!]!): [String!]!
   wearDeleteAllPages1: String!
-  wearCreatePage2(inputCreate: CreatePage!): Page!
-  wearUpdatePage2(inputUpdate: UpdatePage!): Page!
-  wearUpdateImagePage2(inputImage: UpdateImage!): Page!
+  wearCreatePage2(inputCreate: CreatePage!): WearPage2!
+  wearUpdatePage2(inputUpdate: UpdatePage!): WearPage2!
+  wearUpdateImagePage2(inputImage: UpdateImage!): WearPage2!
   wearDeletePage2(id: String!): String!
   wearDeletePages2(ids: [String!]!): [String!]!
   wearDeleteAllPages2: String!
-  wearCreatePage3(inputCreate: CreatePage!): Page!
-  wearUpdatePage3(inputUpdate: UpdatePage!): Page!
-  wearUpdateImagePage3(inputImage: UpdateImage!): Page!
+  wearCreatePage3(inputCreate: CreatePage!): WearPage3!
+  wearUpdatePage3(inputUpdate: UpdatePage!): WearPage3!
+  wearUpdateImagePage3(inputImage: UpdateImage!): WearPage3!
   wearDeletePage3(id: String!): String!
   wearDeletePages3(ids: [String!]!): [String!]!
   wearDeleteAllPages3: String!
+  hardwareStoreCreateSite(inputCreate: CreateSite!): HardwareStoreSite!
+  hardwareStoreUpdateSite(inputUpdate: UpdateSite!): HardwareStoreSite!
+  hardwareStoreUpdateDbSite(inputDB: UpdateDB!): HardwareStoreSite!
+  hardwareStoreUpdateImageSite(inputImage: UpdateImage!): HardwareStoreSite!
+  hardwareStoreDeleteSite(id: String!): String!
+  hardwareStoreDeleteSites(ids: [String!]!): [String!]!
+  hardwareStoreDeleteAllSites: String!
+  hardwareStoreCreatePage0(inputCreate: CreatePage!): HardwareStorePage0!
+  hardwareStoreUpdatePage0(inputUpdate: UpdatePage!): HardwareStorePage0!
+  hardwareStoreUpdateImagePage0(inputImage: UpdateImage!): HardwareStorePage0!
+  hardwareStoreDeletePage0(id: String!): String!
+  hardwareStoreDeletePages0(ids: [String!]!): [String!]!
+  hardwareStoreDeleteAllPages0: String!
+  hardwareStoreCreatePage1(inputCreate: CreatePage!): HardwareStorePage1!
+  hardwareStoreUpdatePage1(inputUpdate: UpdatePage!): HardwareStorePage1!
+  hardwareStoreUpdateImagePage1(inputImage: UpdateImage!): HardwareStorePage1!
+  hardwareStoreDeletePage1(id: String!): String!
+  hardwareStoreDeletePages1(ids: [String!]!): [String!]!
+  hardwareStoreDeleteAllPages1: String!
+  hardwareStoreCreatePage2(inputCreate: CreatePage!): HardwareStorePage2!
+  hardwareStoreUpdatePage2(inputUpdate: UpdatePage!): HardwareStorePage2!
+  hardwareStoreUpdateImagePage2(inputImage: UpdateImage!): HardwareStorePage2!
+  hardwareStoreDeletePage2(id: String!): String!
+  hardwareStoreDeletePages2(ids: [String!]!): [String!]!
+  hardwareStoreDeleteAllPages2: String!
+  hardwareStoreCreatePage3(inputCreate: CreatePage!): HardwareStorePage3!
+  hardwareStoreUpdatePage3(inputUpdate: UpdatePage!): HardwareStorePage3!
+  hardwareStoreUpdateImagePage3(inputImage: UpdateImage!): HardwareStorePage3!
+  hardwareStoreDeletePage3(id: String!): String!
+  hardwareStoreDeletePages3(ids: [String!]!): [String!]!
+  hardwareStoreDeleteAllPages3: String!
+  hardwareStoreCreateProduct(inputCreate: CreateProduct!): Product!
+  hardwareStoreUpdateProduct(inputUpdate: UpdateProduct!): Product!
+  hardwareStoreUpdateSpecsProduct(inputUpdateSpecs: UpdateSpecsProduct!): Product!
+  hardwareStoreUpdateDetailsProduct(inputUpdateDetails: UpdateDetailsProduct!): Product!
+  hardwareStoreUpdateProductImage(inputImage: UpdateImageProduct!): Product!
+  hardwareStoreDeleteProduct(id: String!, type: String!): String!
+  hardwareStoreDeleteProducts(ids: [String!]!, type: String!): [String!]!
   marketingCreateArticle(inputCreate: CreateArticle!): Article!
   marketingUpdateArticle(inputUpdate: UpdateArticle!): Article!
   marketingUpdateImageArticle(inputImage: UpdateImage!): Article!
@@ -369,6 +601,60 @@ input UpdatePage {
   siteId: String!
   uid: String!
   id: String!
+}
+
+input CreateProduct {
+  name: String!
+  mark: String!
+  description: String!
+  promotion: String!
+  inStock: Float!
+  price: Float!
+  discountPrice: Float!
+  siteId: String!
+  parentId: String!
+  uid: String!
+  type: String!
+}
+
+input UpdateProduct {
+  name: String
+  mark: String
+  description: String
+  promotion: String
+  inStock: Float
+  price: Float
+  discountPrice: Float
+  siteId: String
+  parentId: String
+  uid: String
+  type: String
+  id: String!
+  tags: [String!]!
+  details: String!
+  featured: String!
+  specs: String!
+}
+
+input UpdateSpecsProduct {
+  id: String!
+  specs: String!
+  uid: String!
+  type: String!
+}
+
+input UpdateDetailsProduct {
+  id: String!
+  text: String!
+  uid: String!
+  type: String!
+}
+
+input UpdateImageProduct {
+  id: String!
+  type: String
+  uid: String!
+  images: [InputImage!]!
 }
 
 input CreateArticle {
