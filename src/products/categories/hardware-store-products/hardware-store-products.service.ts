@@ -162,6 +162,25 @@ export class HardwareStoreProductsService {
     }
     return this.toModel(data);
   }
+  async getProductBySlug(urlProduct: string, siteId: string, type: string) {
+    let data;
+    switch (slug(type)) {
+      case 'tool':
+        data = await this.toolProductsRespository.findOne({
+          slug: urlProduct,
+          siteId: siteId,
+        });
+        break;
+
+      default:
+        console.log(`Sorry, we are out of ${type}.`);
+        break;
+    }
+    if (!data) {
+      throw new UnprocessableEntityException(`there is no "${type}" category`);
+    }
+    return this.toModel(data);
+  }
   getProducts(type: string) {
     let data;
     switch (slug(type)) {

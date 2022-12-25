@@ -29,6 +29,15 @@ export class HardwareStorePages2Service {
     const document = await this.pageRepository.findOne({ _id: id });
     return this.toModel(document);
   }
+  
+  async findPageBySlug(slug: string, siteId: string) {
+    const document = await this.pageRepository.findOne({
+      slug: slug,
+      siteId: siteId,
+    });
+    return this.toModel(document);
+  }
+
 
   findPages() {
     return this.pageRepository.find({});

@@ -39,6 +39,7 @@ export class HardwareStoreProductsResolver {
   update(@Args('inputUpdate') inputUpdate: UpdateProduct) {
     return this.hardwareStoreProductsService.update(inputUpdate);
   }
+  
   @Mutation(() => Product, { name: 'hardwareStoreUpdateSpecsProduct' })
   updateSpecs(@Args('inputUpdateSpecs') inputUpdateSpecs: UpdateSpecsProduct) {
     return this.hardwareStoreProductsService.updateSpecs(inputUpdateSpecs);
@@ -71,8 +72,20 @@ export class HardwareStoreProductsResolver {
   }
 
   @Query(() => Product, { name: 'hardwareStoreGetProduct' })
-  getSite(@Args('id') id: string, @Args('type') type: string) {
+  getProduct(@Args('id') id: string, @Args('type') type: string) {
     return this.hardwareStoreProductsService.getProduct(id, type);
+  }
+  @Query(() => Product, { name: 'hardwareStoreGetProductBySlug' })
+  getProductBySlug(
+    @Args('slug') slug: string,
+    @Args('siteId') siteId: string,
+    @Args('type') type: string,
+  ) {
+    return this.hardwareStoreProductsService.getProductBySlug(
+      slug,
+      siteId,
+      type,
+    );
   }
 
   @Query(() => [Product], { name: 'hardwareStoreGetProducts' })

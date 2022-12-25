@@ -403,22 +403,27 @@ type Query {
   hardwareStoreGetSites: [HardwareStoreSite!]!
   hardwareStoreGetSitesWithCursor(args: ConnectionArgs!): ListSite!
   hardwareStoreGetPage0(id: String!): HardwareStorePage0!
+  hardwareStoreGetPage0BySlug(slug: String!, siteId: String!): HardwareStorePage0!
   hardwareStoreGetPages0: [HardwareStorePage0!]!
   hardwareStoreGetPages0ByParentId(parentId: String!): [HardwareStorePage0!]!
   hardwareStoreGetPages0WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
   hardwareStoreGetPage1(id: String!): HardwareStorePage1!
+  hardwareStoreGetPage1BySlug(slug: String!, siteId: String!): HardwareStorePage1!
   hardwareStoreGetPages1: [HardwareStorePage1!]!
   hardwareStoreGetPages1ByParentId(parentId: String!): [HardwareStorePage1!]!
   hardwareStoreGetPages1WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
   hardwareStoreGetPage2(id: String!): HardwareStorePage2!
+  hardwareStoreGetPage2BySlug(slug: String!, siteId: String!): HardwareStorePage2!
   hardwareStoreGetPages2: [HardwareStorePage2!]!
   hardwareStoreGetPages2ByParentId(parentId: String!): [HardwareStorePage2!]!
   hardwareStoreGetPages2WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
   hardwareStoreGetPage3(id: String!): HardwareStorePage3!
+  hardwareStoreGetPage3BySlug(slug: String!, siteId: String!): HardwareStorePage3!
   hardwareStoreGetPages3: [HardwareStorePage3!]!
   hardwareStoreGetPages3ByParentId(parentId: String!): [HardwareStorePage3!]!
   hardwareStoreGetPages3WithCursor(args: ConnectionArgs!, parentId: String!): ListPage!
   hardwareStoreGetProduct(id: String!, type: String!): Product!
+  hardwareStoreGetProductBySlug(slug: String!, siteId: String!, type: String!): Product!
   hardwareStoreGetProducts(type: String!): [Product!]!
   hardwareStoreGetProductsWithCursor(args: ConnectionArgs!, type: String!, parentId: String!): ListHardwareStoreProduct!
   marketingGetArticle(id: String!): Article!

@@ -68,6 +68,10 @@ export class HardwareStorePages0Resolver {
   findPage(@Args('id') id: string) {
     return this.pages0Service.findPage(id);
   }
+  @Query(() => HardwareStorePage0, { name: 'hardwareStoreGetPage0BySlug' })
+  findPageBySlug(@Args('slug') slug: string, @Args('siteId') siteId: string) {
+    return this.pages0Service.findPageBySlug(slug, siteId);
+  }
 
   @Query(() => [HardwareStorePage0], { name: 'hardwareStoreGetPages0' })
   findPages() {
